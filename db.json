@@ -1,0 +1,19 @@
+{
+  "phones": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "phone": "+7 921 792 27 68"
+    },
+    {
+      "id": 2,
+      "name": "Donald Trump",
+      "phone": "+1 314-935-5000"
+    },
+    {
+      "id": 3,
+      "name": "Barack Obama",
+      "phone": "+1 202-994-1000"
+    }
+  ]
+}

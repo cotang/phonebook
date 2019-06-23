@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "json-server": "^0.15.0",
     "react": "^16.8.6",
+    "react-csv": "^1.1.1",
+    "react-csv-reader": "^1.2.2",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
@@ -11,7 +14,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fake": "json-server --watch db.json --port 3004"
   },
   "eslintConfig": {
     "extends": "react-app"

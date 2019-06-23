@@ -1,0 +1,7 @@
+.custom-input-file-button input[type='file']{
+  display: none;
+}
+.custom-input-file-button label{
+  margin-bottom: 0;
+  cursor: pointer;
+}
