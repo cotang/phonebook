@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { CSVLink } from "react-csv";
+import { CSVLink } from 'react-csv';
 import CSVReader from 'react-csv-reader';
 
 import ErrorBoundry from '../error-boundry';
-import FakeService from '../../services/fake-service.js'
+import FakeService from '../../services/fake-service.js';
 import PhonebookList from '../phonebook-list';
 import PhonebookForm from '../phonebook-form';
 
@@ -22,37 +22,39 @@ export default class App extends Component {
   showForm = () => {
     this.setState({
       formShown: true
-    })
+    });
   }
   hideForm = () => {
     this.setState({
       selectedItem: null,
       formShown: false
-    })
+    });
   }
   showDetails = (id) => {
     const item = this.state.phoneList.find((item) => item.id === id);
     this.setState({
       selectedItem: item,
       formShown: true
-    })
+    });
   };
 
   loadPhonebook = () => {
     this.fakeService
       .getPhonebook()
-      .then(phoneList => { this.setState({ phoneList }) })
+      .then(phoneList => { this.setState({ phoneList }); });
   }
   addItem = (item) => {
-    const newId = this.state.phoneList.length ? this.state.phoneList[this.state.phoneList.length - 1].id + 1 : 1;
+    const newId = this.state.phoneList.length ?
+      this.state.phoneList[this.state.phoneList.length - 1].id + 1 :
+      1;
     item.id = newId;
     this.fakeService
       .createPerson(item)
       .then(this.setState(({ phoneList }) => {
         return {
           phoneList: [...phoneList, item]
-        }
-      }))
+        };
+      }));
     this.hideForm();
   }
   deleteItem = (item) => {
@@ -62,8 +64,8 @@ export default class App extends Component {
       .then(this.setState(({ phoneList }) => {
         return {
           phoneList: phoneList.filter((item) => item.id !== id)
-        }
-      }))
+        };
+      }));
     this.hideForm();
   }
   editItem = (item) => {
@@ -78,8 +80,8 @@ export default class App extends Component {
             item,
             ...phoneList.slice(idx + 1),
           ]
-        }
-      }))
+        };
+      }));
     this.hideForm();
   }
 
@@ -88,30 +90,32 @@ export default class App extends Component {
     const data = uploadedData.filter(item => item.name);
 
     this.state.phoneList.forEach(phoneItem => {
-      const idx = data.findIndex(dataItem => dataItem.name.toLowerCase() === phoneItem.name.toLowerCase());
+      const idx = data.findIndex(dataItem =>
+        dataItem.name.toLowerCase() === phoneItem.name.toLowerCase());
       // deleting persons who are not in imported list
       if (idx === -1) {
-        this.deleteItem(phoneItem)
+        this.deleteItem(phoneItem);
       } else {
         const phone = data[idx].phone;
-        // updating persons who are both in existing and imported list (if telephone is not the same)
+        // updating persons who are both in existing and imported list 
+        // (if telephone is not the same)
         if (phoneItem.phone !== phone) {
-          const newItem = { ...phoneItem, phone }
-          this.editItem(newItem)
-          data.splice(idx, 1)
+          const newItem = { ...phoneItem, phone };
+          this.editItem(newItem);
+          data.splice(idx, 1);
         }
       }
-    })
+    });
     // adding persons who are in imported list, but who wasn't in initial list
     data.forEach(dataItem => {
-      this.addItem(dataItem)
+      this.addItem(dataItem);
     });
   }
 
   render() {
     const { phoneList, selectedItem, formShown } = this.state;
 
-    const form = formShown ? (selectedItem ?
+    const form = formShown ? selectedItem ?
       <PhonebookForm
         item={selectedItem}
         onSubmitted={this.editItem}
@@ -119,7 +123,7 @@ export default class App extends Component {
       /> :
       <PhonebookForm
         onSubmitted={this.addItem}
-      />) : null;
+      /> : null;
 
     return (
       <ErrorBoundry>
@@ -149,10 +153,10 @@ export default class App extends Component {
                 <div className="mb-3">
                   <CSVLink
                     data={phoneList}
-                    filename={"my-phonebook.csv"}
+                    filename={'my-phonebook.csv'}
                     className="btn btn-primary">
                     Download phonebook
-                </CSVLink>
+                  </CSVLink>
                 </div>
                 <div className="mb-3">
                   <CSVReader

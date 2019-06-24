@@ -17,7 +17,7 @@ export default class PhonebookForm extends Component {
   }
   submitForm = (event) => {
     event.preventDefault();
-    const item = { ...this.state }
+    const item = { ...this.state };
     this.props.onSubmitted(item);
     this.setState({
       id: '',
@@ -70,7 +70,8 @@ export default class PhonebookForm extends Component {
               className="form-control"
               placeholder="Enter telephone" />
           </div>
-          <button type="submit" className="btn btn-primary">{this.props.item ? 'Save changes' : 'Save person'} </button>
+          <button type="submit" className="btn btn-primary">
+            {this.props.item ? 'Save changes' : 'Save person'} </button>
           {deleteButton}
         </form>
       </div>
